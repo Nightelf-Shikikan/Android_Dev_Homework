@@ -1,86 +1,106 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
     fun Task_01() {
-        println("Viktar Salauyou Lesson3 Homework")
-        println("exercise 01 palindrome number")
-        println("Input a number to the console to check if it a palindrome number or not")
-        var number = readLine()!!.toInt()
-        val original = number
+        println("Viktar Salauyou Lesson4 Homework")
+        println("exercise 01 finding min and max numbers in array of numbers and their indexes")
+        println("The array of numbers is 3 36 89 56 2 44 10 8 13 97")
+        val numbers = intArrayOf(3, 36, 89, 56, 2, 44, 10, 8, 13, 97)
 
-        var reversed = 0
-        while (number > 0) {
-            val digit = number % 10       // take the last digit
-            reversed = reversed * 10 + digit // build reversed number
-            number /= 10                  // remove the last digit
-        }
+        var minValue = numbers[0]
+        var maxValue = numbers[0]
+        var minIndex = 0
+        var maxIndex = 0
 
-        if (original == reversed) {
-            println("$original is a palindrome")
-        } else {
-            println("$original is not a palindrome")
-        }
-    }
-
-    fun Task_02() {
-        println("exercise_02 Prime number")
-        println("Input a number to the console to check if it a Prime Number or not")
-        var number = readLine()!!.toInt()
-
-        if (number <= 1) {
-            println("$number is not a prime number")
-            return
-        }
-        var isPrime = true
-        for (i in 2 until number) {   // range from 2 to number-1
-            if (number % i == 0) {    // check if i divides number evenly
-                isPrime = false
-                break
+        for (i in numbers.indices) {
+            if (numbers[i] < minValue) {
+                minValue = numbers[i]
+                minIndex = i
+            }
+            if (numbers[i] > maxValue) {
+                maxValue = numbers[i]
+                maxIndex = i
             }
         }
 
-        if (isPrime) {
-            println("$number is a prime number")
-        } else {
-            println("$number is not a prime number")
+        // Print results
+        println("Minimum value: $minValue at index $minIndex")
+        println("Maximum value: $maxValue at index $maxIndex")
+
+    }
+
+
+    fun Task_02() {
+        println("exercise_02 odd and even numbers")
+        println("calculating odd and even numbers")
+
+        val numbers = intArrayOf(3, 36, 89, 56, 2, 44, 10, 8, 13, 97)
+
+        var odd = 0
+        var even = 0
+
+        for (num in numbers) {
+            if (num % 2 == 0) {
+                println("$num is even")
+                even += 1
+            } else {
+                println("$num is odd")
+                odd += 1
+            }
         }
+
+
+        println("Odd numbers: $odd even numbers $even")
 
     }
 
     fun Task_03() {
-        println("exercise_03 calculating a sum of digits in a number and repeating the process until result is a single digit number")
-        println("Input a number to the console to begin the calculation process")
 
-        var number = readLine()!!.toInt()
+        println("exercise_03 Reverse number in the Array")
+        println("Please input the number to decide the array size ")
 
-        while (number >= 10) {   // keep going until it's a single digit
-            var sum = 0
-            var temp = number
+        val size = readln().toInt()  // user enters array size
 
+        val numbers = IntArray(size)
 
-            // sum all digits
-            while (temp > 0) {
-                sum += temp % 10   // take last digit
-                temp /= 10         // remove last digit
-            }
-            number = sum   // update number with the sum
+        println("Enter $size numbers:")
+
+        for (i in 0 until size) {
+            numbers[i] = readln().toInt()
         }
+        println("Original array: ${numbers.joinToString(", ")}")
 
-        println("Final single digit result: $number")
+        // Reverse array
+        val reversed = numbers.reversedArray()
+
+        println("Reversed array: ${reversed.joinToString(", ")}")
+
+
     }
 
 
     fun Task_04() {
+        println("exercise_04 Checking if Array of number is a palindrom or not")
+        println("Please input the number to decide the array size ")
 
-        println("exercise_01 inverted Ladder")
-        println("Input value for inverted ladder height")
-        val number = readLine()!!.toInt()
+        val size = readln().toInt()
 
-        for (i in number downTo 1) {          // from height down to 1
-            for (j in 1..i) {                 // print i times '#'
-                print("#")
-            }
-            println()                         // move to next line
+        val numbers = IntArray(size)
+
+        println("Enter $size numbers:")
+
+        for (i in 0 until size) {
+            numbers[i] = readln().toInt()
+        }
+        println("Original array: ${numbers.joinToString(", ")}")
+
+        // Reverse array
+        val reversed = numbers.reversedArray()
+
+        println("Reversed array: ${reversed.joinToString(", ")}")
+
+        if (numbers.contentEquals(reversed)) {
+            println("Array: ${numbers.joinToString(", ")} is a palindrome")
+        } else {
+            println("Array: ${numbers.joinToString(", ")} is not a palindrome")
         }
 
 
@@ -93,3 +113,8 @@ fun main() {
     Task_04()
 
 }
+
+
+
+
+
