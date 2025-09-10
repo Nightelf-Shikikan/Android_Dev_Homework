@@ -1,25 +1,23 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-
-    var a1 = true
-
-
-    val str = StringBuilder()
-    str.append("Java")
-    str.append("23242")
-
-    if (a1) {
-        str.append(
-            "fun"
-        )
+    val iphone4 = Electronics("iphone 4", 100.0, 15.0)
+    val tshirt = Clothing("tshirt", 12.0, 33.0)
+    val bread = Food("bread", 2.50, 0.0)
+    val pcMouse = Electronics("PC Mouse", 11.0, 44.0)
+    val ssdDisk = Electronics("SSD Disk", 113.0, 0.0)
 
 
+    val products: List<finalPrice> = listOf(iphone4, tshirt, bread, pcMouse, ssdDisk)
+    println("=== Shop Products ===")
+    for (product in products) {
+        product.displayInfo()
     }
-    else {
-        str.append("not fun")
-    }
-    str.append(".")
-    println(str)
 
+
+    //  println("Shop products")
+    //  iphone4.displayInfo()
+    // tshirt.displayInfo()
+    //  bread.displayInfo()
+    //  pcMouse.displayInfo()
+    //  ssdDisk.displayInfo()
 }
+
