@@ -4,45 +4,17 @@
 
 fun main() {
 
-    fun Task_01() {
-        println("Viktar Salauyou Lesson6 Homework")
-        println("exercise 01 Sorting array of numbers with negative numbers going first ")
+    val Book_01 = Book(id = 3456, title = "Starship Troopers", author = "Robert Heinlein", year = 1967, Genre.SCI_FI)
+    val Book_02 = Book(id = 3226, title = "Steel Rat", author = "Harry Harrison", year = 1977, Genre.SCI_FI)
+    val Book_03 = Book(id = 1111, title = "Dune", author = "Frank Herbert", year = 1966, Genre.SCI_FI)
+    val Book_04 = Book(id = 3760, title = "Lord of Light", author = "Roger Zelazny", year = 1987, Genre.SCI_FI)
 
-        val numbers = arrayOf(4, -3, 2, -1, 0, -5)
-        val result = mutableListOf<Int>()
+    Book_01.borrow("Alice")
+    Book_02.borrow("Bob")
 
-        for (i in numbers) {
-            if (i < 0) result.add(i)
-
-        }
-        for (i in numbers) {
-            if (i >= 0) result.add(i)
-
-        }
-
-        println("Sorted: ${result.joinToString()}")
-
-
-    }
-
-    fun Task_02() {
-        println("Viktar Salauyou Lesson6 Homework")
-        println("exercise 02 Sorting array by how often same numbers appear in it ")
-
-        val numbers = arrayOf(4, -3, 2, -1, 0, -5, -3, 0, 5, 2, 1, 2, 4, 5, 3, 1, 7, 56, 4, 8)
-        val freqMap = numbers.groupingBy { it }.eachCount()
-
-        val sorted = numbers.sortedWith(
-            compareByDescending<Int> { freqMap[it] }  // first criterion: frequency
-                .thenBy { it }                        // second criterion: value (ascending)
-        )
-        println("Original: ${numbers.joinToString()}")
-        println("Sorted by frequency: ${sorted.joinToString()}")
-
-    }
-
-
-    Task_01()
-    Task_02()
+    println(Book_01 == Book_02)  // false
+    println(Book_01 == Book_01)  // true
+    println(Book_01.hashCode())
 
 }
+
