@@ -1,0 +1,39 @@
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+
+fun main() {
+
+    val Book_01 = Book(title = "Starship Troopers", author = "Robert Hainlain", year = "1967")
+    val Book_02 = Book(title = "Steel Rat", author = "Harry Harryson", year = "1977")
+    val Book_03 = Book(title = "Dune", author = "Franck Herbert", year = "1966")
+    val Book_04 = Book(title = "Lord of Light", author  = "Robert Zelyazny", year = "1987")
+
+    book1.borrow("Alice")
+    book3.borrow("Bob")
+
+
+    override fun equals(other: Any?) {
+        if (this === other) return true
+        if (javaClass != other?.JavaClass) return false
+
+        other as Book
+
+        if (title != other.title) return false
+        if (autor != other.autor) return false
+        if (year != other.year) return false
+
+        return true
+
+    }
+
+
+    override fun hashCode(): Int {
+        var result = title
+        result = 31 * result + title.hashCode()
+        result = 31 * result + (book?.hashCode() ?: 0)
+        return result
+
+    }
+
+}
