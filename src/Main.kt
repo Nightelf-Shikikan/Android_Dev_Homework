@@ -1,26 +1,20 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-fun reverseOrderOfWords(originalSentence: String): String {
-    return originalSentence.split(" ") // Splits the string into a list of words using space as a delimiter
-        .reversed()           // Reverses the order of elements in the list
-        .joinToString(" ")    // Joins the list of words back into a single string, separated by spaces
-
-
-}
 
 
 fun main() {
-    println("Viktar Salauyou Lesson5 Homework")
-    println("exercise 01 receive words and restructure them backwards ")
 
-    val originalSentence = "This is a sample sentence"
-    val reversedSentence = reverseOrderOfWords(originalSentence)
+    val Book_01 = Book(id = 3456, title = "Starship Troopers", author = "Robert Heinlein", year = 1967, Genre.SCI_FI)
+    val Book_02 = Book(id = 3226, title = "Steel Rat", author = "Harry Harrison", year = 1977, Genre.SCI_FI)
+    val Book_03 = Book(id = 1111, title = "Dune", author = "Frank Herbert", year = 1966, Genre.SCI_FI)
+    val Book_04 = Book(id = 3760, title = "Lord of Light", author = "Roger Zelazny", year = 1987, Genre.SCI_FI)
 
+    Book_01.borrow("Alice")
+    Book_02.borrow("Bob")
 
-
-
-
-    println("Original: $originalSentence")
-    println("Reversed: $reversedSentence") // Output: sentence sample a is This
+    println(Book_01 == Book_02)  // false
+    println(Book_01 == Book_01)  // true
+    println(Book_01.hashCode())
 
 }
+
