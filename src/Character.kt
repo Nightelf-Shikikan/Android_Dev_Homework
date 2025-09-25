@@ -11,9 +11,7 @@ open class GameCharacter(
 
     }
 
-    fun isAlive(): Boolean {
-        return health > 0
-    }
+
 
     fun takeDamage(damage: Int) {
         var remainingDamage = damage
