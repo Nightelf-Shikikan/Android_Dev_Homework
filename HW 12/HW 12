@@ -1,0 +1,68 @@
+import Node
+import LinkedList
+
+fun Task01() {
+    println("Task 01 sorting anagram words")
+
+    val originalList = listOf<String>("Listen", "Silent", "enlist", "java", "avaj", "world")
+    println("Original List: $originalList")
+
+    // Step 1: normalize to lowercase so case differences don't matter
+    val lowerList = originalList.map { it.lowercase() }
+
+    // Step 2: create a map that groups by sorted letters
+    val grouped = lowerList.groupBy { word ->
+        val key = word.toCharArray().sorted().joinToString("")
+        println("Word: $word  →  Sorted key: $key")  // debug output
+        key
+    }
+
+    // Step 3: print the grouped map nicely
+    println("\nAnagram groups found:")
+    for ((key, group) in grouped) {
+        println("Key '$key' -> Words: $group")
+    }
+
+    // Step 4: show true anagram sets (more than 1 word)
+    println("\nOnly real anagrams (size > 1):")
+    grouped.values.filter { it.size > 1 }.forEach { println(it) }
+}
+
+
+fun Task02() {
+    println("Task 02 finding first repeating number")
+
+    val originalList = listOf<Int>(2, 3, 4, 2, 4, 21, 1, 889, 34, 2, 21, 5)
+    println("original List: $originalList")
+
+    val seen = mutableSetOf<Int>()
+
+    var firstRepeat: Int? = null
+
+    for (num in originalList) {
+        if (num in seen) {
+            firstRepeat = num
+            break
+        } else {
+            seen.add(num)
+
+        }
+    }
+    if (firstRepeat != null)
+        println("First repeating number: $firstRepeat")
+    else
+        println("No repeating numbers found")
+
+}
+
+
+
+
+fun main() {
+    Task01()
+    Task02()
+
+}
+
+
+
