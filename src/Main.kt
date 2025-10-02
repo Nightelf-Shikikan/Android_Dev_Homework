@@ -1,72 +1,97 @@
-import java.util.InputMismatchException
+import kotlin.concurrent.thread
+import java.util.concurrent.atomic.AtomicInteger
 
-class TooYongException(message: String) : Exception(message)
 
-fun validateAge(age: Int) {
-    if (age <= 17) {
-        throw TooYongException("Must be 18 or older")
+class Counter() {
+    var count = 0
+    fun inc(lock: Any) {
+        synchronized(lock) {
+            count++
+        }
     }
 
+    fun dec(lock: Any) {
+        synchronized(lock) {
+            count--
+        }
+    }
 }
 
 
 fun Task01() {
-    println("Task 01 divide numbers and check for exeptions")
+    println("Task 01 two threads with external obj")
+    val counter01 = Counter()
+    val lock1 = Any()
 
-    try {
-        println("input first number")
-        var num01 = readln().toInt()
-
-        println("input second number")
-        var num02 = readln().toInt()
-
-        val result: Int = num01 / num02
-        println("Result: $result")
-
-    } catch (a: ArithmeticException) {
-        println("Error: can't divide by zero")
-    } catch (b: InputMismatchException) {
-        println("Error: Invalod input")
+    val t1 = thread {
+        for (i in 1..10) {
+            counter01.inc(lock1)
+            println("Thread 01 count up: ${counter01.count}")
+            Thread.sleep(200)
+        }
     }
 
+    val t2 = thread {
+        for (i in 1..15) {
+            counter01.dec(lock1)
+            println("Thread 02 count down: ${counter01.count}")
+            Thread.sleep(300)
+        }
+    }
+    t1.join()
+    t2.join()
+    println("Final count = ${counter01.count}")
 }
 
 fun Task02() {
+    println("Task 02 atomic process")
+    val counter = AtomicInteger(0)
+    val t1 = thread {
+        repeat(10) {
+            val newValue = counter.incrementAndGet()
+            println("Thread 1: $newValue")
+            Thread.sleep(100)
+        }
 
-    println("Task 02 Checking the age of a person")
-
-    try {
-        println("Enter person's Age")
-        val age = readln().toInt()
-
-        validateAge(age)
-
-        println("Your age is: $age")
-
-    } catch (a: TooYongException) {
-        println("Error: Must be 18 or older")
-
-    } catch (e: NumberFormatException) {
-        println("Error: Please enter a valid number")
     }
+
+    val t2 = thread {
+
+        repeat(10) {
+            val newValue = counter.incrementAndGet()
+            println("Thread 2: $newValue")
+            Thread.sleep(100)
+
+        }
+    }
+    t1.join()
+    t2.join()
+
+    println("Final count = ${counter.get()}")
 }
 
 fun Task03() {
+    println("Task 03 sync two threads ")
+    val counter = Counter()
+    val lock = Any()
 
-    println("Task 03 divide numbers and check for exeptions")
-    try {
-        println("Enter a string:")
-        val input = readln()
+    val t1 = Thread {
+        for (i in 1..1000)
+            counter.inc(lock)
+        println("Thread 01 : ${counter.count}")
+        Thread.sleep(1000)
 
-        if (input.isEmpty()) {
-            throw IllegalArgumentException("Input cannot be empty")
-        }
-
-        println("You entered: $input")
-
-    } catch (e: IllegalArgumentException) {
-        println("Error: ${e.message}")
     }
+    val t2 = Thread {
+        for (i in 1..1000)
+            counter.dec(lock)
+        println("Thread 02: ${counter.count}")
+        Thread.sleep(1000)
+
+
+    }
+
+    println("final counter: ${counter.count}")
 
 }
 
