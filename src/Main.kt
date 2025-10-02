@@ -53,7 +53,7 @@ fun Task02() {
 
 fun Task03() {
 
-    println("Task 03 divide numbers and check for exeptions")
+    println("Task 03 checking for empty string")
     try {
         println("Enter a string:")
         val input = readln()
